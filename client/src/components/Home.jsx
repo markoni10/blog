@@ -1,7 +1,13 @@
 import React from 'react';
+import PageWrapper from './PageWrapper';
+import PageTitle from './PageTitle';
 
 function Home() {
-	return <h1>Home</h1>;
+	return (
+		<PageWrapper>
+			<PageTitle title='Home' />
+		</PageWrapper>
+	);
 }
 
 export default Home;

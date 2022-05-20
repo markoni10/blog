@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './components/Home';
@@ -13,16 +13,14 @@ function App() {
 
 	return (
 		<>
-			<Header />
-			<Router>
-				<Routes>
-					<Route exact path='/' element={<Home />} />
-					<Route exact path='/blog' element={<Blog />} />
-					<Route exact path='/login' element={<Login />} />
-					<Route exact path='/dashboard' element={<Dashboard token={token} handleLogin={<Login setToken={setToken} />} />} />
-					<Route exact path='/preferences' element={<Preferences token={token} />} />
-				</Routes>
-			</Router>
+			<Header logo={'Awesome Blog'} />
+			<Routes>
+				<Route index path='/' element={<Home />} />
+				<Route path='/blog' element={<Blog />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/dashboard' element={<Dashboard token={token} handleLogin={<Login setToken={setToken} />} />} />
+				<Route path='/preferences' element={<Preferences token={token} />} />
+			</Routes>
 		</>
 	);
 }
