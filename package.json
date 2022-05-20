@@ -3,14 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "devDependencies": {
-    "concurrently": "^7.2.0",
-    "recursive-install": "^1.4.0"
-  },
   "scripts": {
-    "install": "npm-recursive-install --skip-root",
-    "start": "concurrently \"cd src/client && npm start\" \"cd src/server && npm start\"",
-    "build": "concurrently \"cd src/client && npm run build\" \"cd src/server && npm run serve\""
+    "install": "cd client && npm install",
+    "start": "cd client && npm start",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,8 +17,5 @@
   "bugs": {
     "url": "https://github.com/markoni10/blog/issues"
   },
-  "homepage": "https://github.com/markoni10/blog#readme",
-  "dependencies": {
-    "mongodb": "^4.6.0"
-  }
+  "homepage": "https://github.com/markoni10/blog#readme"
 }
