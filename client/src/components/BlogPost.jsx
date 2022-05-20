@@ -2,12 +2,21 @@ import React from 'react';
 
 function BlogPost({ items }) {
 	return (
-		<article className='max-w-md mx-auto mt-4 shadow-lg border rounded-md duration-300 hover:shadow-sm'>
+		<article className='max-w-md mx-auto mt-4 shadow-md rounded-md duration-300 hover:shadow-xl cursor-pointer'>
 			<a href={items.href}>
-				<img src={items.img} loading='lazy' alt={items.title} className='w-full h-48 rounded-t-md' />
+				<img
+					src={items.img}
+					loading='lazy'
+					alt={items.title}
+					className='flex items-center justify-center w-full h-48 rounded-t-md bg-gray-200 before:text-gray-300 before:font-bold before:text-2xl before:tracking-wide'
+				/>
 				<div className='flex items-center mt-2 pt-3 ml-4 mr-2'>
 					<div className='flex-none w-10 h-10 rounded-full'>
-						<img src={items.authorLogo} className='w-full h-full rounded-full' alt={items.authorName} />
+						<img
+							src={items.authorLogo}
+							className='flex items-center justify-center overflow-hidden bg-gray-300 before:text-gray-400 before:text-xs before:text-center before:opacity-0 w-full h-full rounded-full'
+							alt={items.authorName}
+						/>
 					</div>
 					<div className='ml-3'>
 						<span className='block text-gray-900'>{items.authorName}</span>
