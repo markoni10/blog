@@ -1,7 +1,13 @@
 import React from 'react';
+import PageTitle from './PageTitle';
+import PageWrapper from './PageWrapper';
 
 function Preferences() {
-	return <h1>Preferences</h1>;
+	return (
+		<PageWrapper>
+			<PageTitle title='Preferences' />
+		</PageWrapper>
+	);
 }
 
 export default Preferences;

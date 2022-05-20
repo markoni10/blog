@@ -12,7 +12,7 @@ function App() {
 	const [token, setToken] = useState();
 
 	return (
-		<main>
+		<>
 			<Header />
 			<Router>
 				<Routes>
@@ -23,7 +23,7 @@ function App() {
 					<Route exact path='/preferences' element={<Preferences token={token} />} />
 				</Routes>
 			</Router>
-		</main>
+		</>
 	);
 }
 

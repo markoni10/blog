@@ -6,7 +6,7 @@ function Header() {
 	const navigation = [{ title: 'Blog', path: '/blog' }];
 
 	return (
-		<nav className='bg-white w-full top-0 z-20 sticky'>
+		<header className='max-w-7xl mx-auto bg-white w-full top-0 z-20 sticky'>
 			<div className='items-center px-4 max-w-screen-xl mx-auto lg:flex lg:px-8'>
 				<div className='flex items-center justify-between py-3 lg:py-4 lg:block'>
 					<a href='/'>
@@ -61,7 +61,7 @@ function Header() {
 					</div>
 				</div>
 			</div>
-		</nav>
+		</header>
 	);
 }
 
