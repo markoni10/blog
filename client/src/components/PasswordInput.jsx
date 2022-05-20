@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { FiEyeOff } from 'react-icons/fi';
 
-function Input({ id, type, label, iconLeft, iconRight }) {
+function PasswordInput({ id, label, iconLeft, iconRight }) {
+	const [visible, setVisible] = useState(false);
 	const [value, setValue] = useState('');
+
+	const handleVisibility = () => {
+		setVisible(!visible);
+	};
 
 	const handleInput = e => {
 		e.preventDefault();
@@ -18,15 +24,15 @@ function Input({ id, type, label, iconLeft, iconRight }) {
 				{iconLeft}
 				<input
 					onChange={handleInput}
-					type={type}
+					value={value}
+					type={visible ? 'text' : 'password'}
 					id={id}
 					className='w-full p-1 ml-2 text-gray-500 outline-none focus-visible:outline-none bg-transparent'
-					value={value}
 				/>
-				<span>{iconRight}</span>
+				<span onClick={handleVisibility}>{visible ? iconRight : <FiEyeOff style={{ cursor: 'pointer', color: 'gray', fontSize: '1.25rem' }} />}</span>
 			</div>
 		</div>
 	);
 }
 
-export default Input;
+export default PasswordInput;
