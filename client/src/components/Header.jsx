@@ -3,11 +3,7 @@ import { useState } from 'react';
 function Header() {
 	const [state, setState] = useState(false);
 
-	const navigation = [
-		{ title: 'Guides', path: '/guides' },
-		{ title: 'About', path: '/about' },
-		{ title: 'Blog', path: '/blog' },
-	];
+	const navigation = [{ title: 'Blog', path: '/blog' }];
 
 	return (
 		<nav className='bg-white w-full top-0 z-20 sticky'>
@@ -40,11 +36,6 @@ function Header() {
 					}`}>
 					<div>
 						<ul className='flex flex-col-reverse space-x-0 lg:space-x-6 lg:flex-row'>
-							<li className='mt-8 mb-8 lg:mt-0 lg:mb-0'>
-								<a href='/contact' className='text-gray-600 hover:text-indigo-600'>
-									Contact
-								</a>
-							</li>
 							<li className='mt-4 lg:mt-0'>
 								<a href='/login' className='py-3 px-4 text-center border text-gray-600 hover:text-indigo-600 rounded-md block lg:inline lg:border-0'>
 									Login
