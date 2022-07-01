@@ -1,22 +1,26 @@
+version: '3.9' 
+
 services:
 
   client:
     build:
-      context: .
-      dockerfile: Dockerfile.client
-    depends_on:
-      - backend
+      context: client
     ports:
       - 3000:3000
+    volumes:
+      - ./client/public:/client/public
+      - node_modules_client:/client/node_modules
 
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile.server
+      context: server
     ports:
       - 5000:5000
+    volumes:
+      - ./server:/backend
+      - ./client/public:/client/public
+      - node_modules_backend:/backend/node_modules 
 
-  web_server:
-    image: nginx
-    ports:
-      - 8000:8000
+volumes:
+  node_modules_client:
+  node_modules_backend:
