@@ -1,0 +1,14 @@
+FROM node:lts-slim
+
+COPY --chown=1000:www-data client /app
+
+WORKDIR /client
+
+COPY client/package.json .
+COPY client/package-lock.json .
+
+RUN npm ci
+
+EXPOSE 3000
+
+ENTRYPOINT [ "npm", "start" ]

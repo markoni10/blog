@@ -1,0 +1,22 @@
+services:
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - 5000:5000
+
+  web_server:
+    image: nginx
+    ports:
+      - 8000:8000
