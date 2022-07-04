@@ -2,9 +2,9 @@ FROM node:lts-slim
 
 WORKDIR /client
 
-COPY . /client
+COPY --chown=1000 . /client
 
-COPY package.json package-lock.json /client/
+COPY --chown=1000 package.json package-lock.json /client/
 
 RUN npm ci
 

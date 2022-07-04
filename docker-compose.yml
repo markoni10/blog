@@ -4,23 +4,38 @@ services:
 
   client:
     build:
-      context: client
+      context: src/client
     ports:
       - 3000:3000
     volumes:
-      - ./client/public:/client/public
+      - ./src/client/public:/client/public
       - node_modules_client:/client/node_modules
 
-  backend:
+  api:
+    depends_on:
+      db:
+        condition: service_healthy
     build:
-      context: server
+      context: src/api
     ports:
       - 5000:5000
     volumes:
-      - ./server:/backend
-      - ./client/public:/client/public
-      - node_modules_backend:/backend/node_modules 
+      - ./src/api:/api
+      - ./src/client/public:/client/public
+      - node_modules_api:/api/node_modules
+
+  db:
+    image: mariadb:10.8
+    env_file: .env
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20 
 
 volumes:
+  db:
   node_modules_client:
-  node_modules_backend:
+  node_modules_api:

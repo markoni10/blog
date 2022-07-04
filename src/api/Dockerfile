@@ -1,10 +1,10 @@
 FROM node:lts-slim
 
-WORKDIR /backend
+WORKDIR /api
 
-COPY . /backend
+COPY --chown=1000 . /api
 
-COPY package.json package-lock.json /backend/
+COPY --chown=1000 package.json package-lock.json /api/
 
 RUN npm i --location=global nodemon
 
