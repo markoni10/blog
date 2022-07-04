@@ -34,6 +34,17 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20 
+  
+  pma:
+    image: phpmyadmin
+    environment:
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      PMA_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8000:80
 
 volumes:
   db:
