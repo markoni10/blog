@@ -1,0 +1,52 @@
+version: '3.9' 
+
+services:
+
+  client:
+    build:
+      context: src/client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src/client/public:/client/public
+      - node_modules_client:/client/node_modules
+
+  api:
+    depends_on:
+      db:
+        condition: service_healthy
+    build:
+      context: src/api
+    ports:
+      - 5000:5000
+    volumes:
+      - ./src/api:/api
+      - ./src/client/public:/client/public
+      - node_modules_api:/api/node_modules
+
+  db:
+    image: mariadb:10.8
+    env_file: .env
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20 
+  
+  pma:
+    image: phpmyadmin
+    environment:
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      PMA_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8000:80
+
+volumes:
+  db:
+  node_modules_client:
+  node_modules_api:
