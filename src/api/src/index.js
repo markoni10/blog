@@ -7,12 +7,14 @@ const app = express();
 
 app.use(cors());
 
-// routes
+// routers
 import indexRouter from './routes/index.js';
 import postsRouter from './routes/post/index.js';
+import usersRouter from './routes/user/index.js';
 
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
 
 app.use(logger('dev'));
 app.use(cookieParser());

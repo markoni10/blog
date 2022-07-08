@@ -19,17 +19,11 @@ model Post {
   @@map("posts")
 }
 
-model Comment {
-  id      Int @id @default(autoincrement())
-  content String
-  authorId Int
-
-  @@map("comments")
-}
-
 model User {
-  id Int  @id @default(autoincrement())
+  id       Int  @id @default(autoincrement())
   username String?
+  email    String
+  password String
 
   @@map("users")
 }
