@@ -1,11 +1,11 @@
 datasource db {
   provider = "mysql"
-  url      = "mysql://blog:blog@localhost:3306/blog"
-
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+  output   = "./"
 }
 
 model Post {
@@ -13,14 +13,22 @@ model Post {
   title     String
   excerpt   String?
   img       String?
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+  author_id Int
+
+  @@map("posts")
+}
+
+model Comment {
+  id      Int @id @default(autoincrement())
+  content String
+  authorId Int
+
+  @@map("comments")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
-  img   String?
+  id Int  @id @default(autoincrement())
+  username String?
+
+  @@map("users")
 }
