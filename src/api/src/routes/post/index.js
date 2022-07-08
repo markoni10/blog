@@ -7,7 +7,5 @@ const prisma = new PrismaClient();
 
 export const posts = app.get('/', async (req, res) => {
 	const posts = await prisma.post.findMany();
-	res.send({
-		posts,
-	});
+	res.send(posts);
 });

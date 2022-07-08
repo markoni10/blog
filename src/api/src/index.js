@@ -1,8 +1,11 @@
 import express, { json } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 // routes
 import { index } from './routes/index.js';
