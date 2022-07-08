@@ -8,11 +8,11 @@ const app = express();
 app.use(cors());
 
 // routes
-import { index } from './routes/index.js';
-import { posts } from './routes/post/index.js';
+import indexRouter from './routes/index.js';
+import postsRouter from './routes/post/index.js';
 
-app.use('/', index);
-app.use('/posts', posts);
+app.use('/', indexRouter);
+app.use('/posts', postsRouter);
 
 app.use(logger('dev'));
 app.use(cookieParser());

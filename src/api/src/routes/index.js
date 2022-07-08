@@ -2,8 +2,10 @@ import express from 'express';
 
 const app = express();
 
-export const index = app.get('/', (req, res) =>
+const indexRouter = app.get('/', (req, res) =>
 	res.send({
 		message: 'Hello from API!',
 	}),
 );
+
+export default indexRouter;
