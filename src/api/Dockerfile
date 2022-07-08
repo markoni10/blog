@@ -13,8 +13,6 @@ RUN npm i --location=global nodemon
 
 RUN npm ci
 
-RUN npm run prisma-generate
-
 EXPOSE 5000
 
 ENTRYPOINT [ "npm", "run", "dev" ]
