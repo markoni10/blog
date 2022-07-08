@@ -22,7 +22,6 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - prisma:/src/api/src/prisma/generated
       - ./src/api:/api
       - ./src/client/public:/client/public
       - node_modules_api:/api/node_modules
@@ -49,4 +48,3 @@ volumes:
   db:
   node_modules_client:
   node_modules_api:
-  prisma:
