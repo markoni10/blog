@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+- Fetch data from local database
+
+### Added
+- Prisma ORM
+- Posts table
+- Users table
+- TypeScript support
+
+### Removed
+- demo db.json
+
 ## [0.1.0] - 2022-07-01
 
 ### Added
