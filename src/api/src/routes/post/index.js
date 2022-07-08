@@ -1,9 +1,13 @@
 import express from 'express';
+import { PrismaClient } from '../../prisma/index.js';
 
 const app = express();
 
-export const posts = app.get('/', (req, res) =>
+const prisma = new PrismaClient();
+
+export const posts = app.get('/', async (req, res) => {
+	const posts = await prisma.post.findMany();
 	res.send({
-		message: 'Hello from /posts route',
-	}),
-);
+		posts,
+	});
+});
