@@ -1,0 +1,26 @@
+datasource db {
+  provider = "mysql"
+  url      = "mysql://blog:blog@localhost:3306/blog"
+
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  excerpt   String?
+  img       String?
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+  img   String?
+}
