@@ -1,5 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '../../prisma/index.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -31,6 +32,33 @@ router.get('/:id', async (req, res) => {
 	}
 
 	res.send(user);
+});
+
+router.post('/', async (req, res) => {
+	const { email, username, password } = req.body;
+
+	const password_salt = bcrypt.genSaltSync();
+	const password_hash = bcrypt.hashSync(password, password_salt);
+
+	const user = await prisma.user.findUnique({
+		where: {
+			email,
+		},
+	});
+
+	if (!user) {
+		await prisma.user.create({
+			data: {
+				email,
+				username,
+				password: password_hash,
+			},
+		});
+
+		return res.send({ message: 'User created.' });
+	}
+
+	res.send({ message: 'User with that email already exists.' });
 });
 
 export default router;
