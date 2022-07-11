@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express, { Router, Request, Response } from 'express';
 import { PrismaClient } from '../../prisma/index.js';
 import bcrypt from 'bcrypt';
 
@@ -34,6 +34,8 @@ router.get('/:id', async (req, res) => {
 	res.send(user);
 });
 
+
+
 router.post('/', async (req, res) => {
 	const { email, username, password } = req.body;
 
@@ -47,6 +49,7 @@ router.post('/', async (req, res) => {
 	});
 
 	if (!user) {
+
 		await prisma.user.create({
 			data: {
 				email,
