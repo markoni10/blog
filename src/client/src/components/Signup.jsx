@@ -1,10 +1,10 @@
 import React from 'react';
-import Input from './Input';
+import Input from './inputs/Input';
 import { FiMail, FiLock, FiUnlock, FiUser, FiEye } from 'react-icons/fi';
 import PageWrapper from './PageWrapper';
 import PageTitle from './PageTitle';
 import { Link } from 'react-router-dom';
-import PasswordInput from './PasswordInput';
+import PasswordInput from './inputs/PasswordInput';
 
 function Signup() {
 	const inputStyle = {
