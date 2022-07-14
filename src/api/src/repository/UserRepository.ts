@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../prisma';
 import ExtError from '../util/errors/ExtError';
 
 import HTTP_STATUS from '../enum/HttpStatus.js';
