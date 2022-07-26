@@ -1,4 +1,3 @@
-import React from 'react';
 import Input from '../../components/inputs/Input';
 import { FiUser, FiLock, FiEye } from 'react-icons/fi';
 import PageWrapper from '../../components/PageWrapper';
@@ -30,8 +29,9 @@ function Login() {
 					<form autoComplete='off' className='flex flex-col gap-4'>
 						<Input type='text' label='Username' id='username' iconLeft={<FiUser style={inputStyle} />} />
 						<PasswordInput
-							label='Repeat Password'
-							id='repeat-password'
+							label='Password'
+							id='password'
+							type="password"
 							iconLeft={<FiLock style={inputStyle} />}
 							iconRight={<FiEye style={{ cursor: 'pointer', ...inputStyle }} />}
 						/>

@@ -2,7 +2,7 @@ import { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '@material-tailwind/react';
 
-function Header({ logo }) {
+function Header({ logo }: { logo: string}) {
 	const [state, setState] = useState(false);
 
 	return (

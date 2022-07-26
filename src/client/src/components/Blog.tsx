@@ -8,12 +8,12 @@ import PageTitle from './PageTitle';
 import PageWrapper from './PageWrapper';
 
 export default function Blog() {
-	const { fetchBlogs } = useContext(BlogContext);
-	const [posts, setPosts] = useState([]);
+	const { fetchBlogs } = useContext<any>(BlogContext);
+	const [posts, setPosts] = useState<object[]>([]);
 
 	useEffect(() => {
 		if (!posts.length) {
-			fetchBlogs().then(posts => setPosts(posts));
+			fetchBlogs().then((posts: object[]) => setPosts(posts));
 		}
 	}, [fetchBlogs, posts]);
 
@@ -21,9 +21,9 @@ export default function Blog() {
 		<PageWrapper>
 			<PageTitle title='Blog' desc='Blogs that are loved by the community. Updated every hour.' />
 			<div className='mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3'>
-				{posts.map(items => (
-					<BlogPost items={items} key={uuidv4()} />
-				))}
+				{posts.map((item: any)=>  
+					<BlogPost item={item} key={uuidv4()} />
+				)}
 			</div>
 		</PageWrapper>
 	);

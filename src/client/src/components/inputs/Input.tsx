@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
+import { InputProps } from './types';
 
-function Input({ id, type, label, iconLeft, iconRight }) {
+function Input({ id, type, label, iconLeft, iconRight }: InputProps) {
 	const [value, setValue] = useState('');
 
-	const handleInput = e => {
+	const handleInput = (e: SyntheticEvent ) => {
 		e.preventDefault();
+		const target = e.target as HTMLInputElement;
 
-		setValue(() => e.target.value);
+		setValue(() => target.value);
 	};
 
 	return (
-		<div>
+		<>
 			<label htmlFor={id} className='block py-3 text-sm font-bold tracking-wide text-gray-500'>
 				{label}
 			</label>
@@ -25,7 +27,7 @@ function Input({ id, type, label, iconLeft, iconRight }) {
 				/>
 				<span>{iconRight}</span>
 			</div>
-		</div>
+		</>
 	);
 }
 

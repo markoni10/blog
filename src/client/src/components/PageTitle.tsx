@@ -1,6 +1,9 @@
-import React from 'react';
+interface PageTitleProps {
+	title: string,
+	desc?: string
+}
 
-function PageTitle({ title, desc }) {
+function PageTitle({ title, desc }: PageTitleProps) {
 	return (
 		<div className='text-left'>
 			<h1 className='text-7xl text-gray-800 font-semibold'>{title}</h1>

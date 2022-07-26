@@ -33,12 +33,14 @@ function Signup() {
 						<PasswordInput
 							label='Password'
 							id='password'
+							type='password'
 							iconLeft={<FiUnlock style={inputStyle} />}
 							iconRight={<FiEye style={{ cursor: 'pointer', ...inputStyle }} />}
 						/>
 						<PasswordInput
 							label='Repeat Password'
 							id='repeat-password'
+							type='password'
 							iconLeft={<FiLock style={inputStyle} />}
 							iconRight={<FiEye style={{ cursor: 'pointer', ...inputStyle }} />}
 						/>

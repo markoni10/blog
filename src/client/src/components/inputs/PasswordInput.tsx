@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { FiEyeOff } from 'react-icons/fi';
+import { InputProps } from './types';
 
-function PasswordInput({ id, label, iconLeft, iconRight }) {
+function PasswordInput({ id, label, iconLeft, iconRight }: InputProps) {
 	const [visible, setVisible] = useState(false);
 	const [value, setValue] = useState('');
 
@@ -9,10 +10,12 @@ function PasswordInput({ id, label, iconLeft, iconRight }) {
 		setVisible(!visible);
 	};
 
-	const handleInput = e => {
+	const handleInput = (e: SyntheticEvent) => {
 		e.preventDefault();
 
-		setValue(() => e.target.value);
+		const target = e.target as HTMLInputElement;
+
+		setValue(() => target.value);
 	};
 
 	return (
