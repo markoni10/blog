@@ -1,7 +1,6 @@
 import { Response } from "express";
 
 export function processError (error: any, res: Response) {
-
     if(error.status && error.status < 500) 
         return res.status(error.status).json({ message: error.reason });
 

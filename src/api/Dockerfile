@@ -23,7 +23,7 @@ FROM mariadb:10.8 as db
 
 WORKDIR /docker-entrypoint-initdb.d/
 
-COPY posts.sql .
+COPY demo.sql .
 
 EXPOSE 3306
 
