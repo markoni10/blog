@@ -8,7 +8,7 @@ type BlogPostProps = {
 
 function BlogPost({item: {title, excerpt, img}}: BlogPostProps) {
 	return (
-		<article className='max-w-md mx-auto mt-4 shadow-md rounded-md duration-300 hover:shadow-xl cursor-pointer'>
+		<article className='min-w-full max-w-md mx-auto mt-4 shadow-md rounded-md duration-300 hover:shadow-xl cursor-pointer'>
 			<a href='/'>
 				<img
 					src={img}
