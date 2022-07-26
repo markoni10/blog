@@ -3,9 +3,3 @@ node_modules
 
 # secrets
 .env
-
-# ignore prisma generated files
-src/api/src/prisma/*
-
-# whitelist prisma schema file
-!src/api/src/prisma/schema.prisma

@@ -10,6 +10,7 @@ services:
     volumes:
       - ./src/client:/client
       - ./src/client/public:/client/public
+      - node_modules_client:/client/node_modules
 
   api:
     depends_on:
@@ -24,7 +25,7 @@ services:
     volumes:
       - ./src/api:/api
       - ./src/client/public:/client/public
-
+      - node_modules_api:/api/node_modules
   db:
     build:
       context: src/api
@@ -45,3 +46,5 @@ services:
 
 volumes:
   db:
+  node_modules_api:
+  node_modules_client:

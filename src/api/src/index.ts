@@ -3,17 +3,14 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 
+import postsRouter from './routes/PostRoutes';
+import usersRouter from './routes/UserRoutes';
+
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
 // routers
-import indexRouter from './routes/index.js';
-import postsRouter from './routes/post/index.js';
-import usersRouter from './routes/user/index.js';
-
-app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 
