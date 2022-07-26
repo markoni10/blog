@@ -44,3 +44,19 @@ export const createPost = async ({ title, excerpt, img, author_id }: PostType) =
 
     return post;
 }
+
+export const deletePost = async (id: number) => {
+    const postExists = await getPostById(id);
+
+    if(!postExists) {
+        throw new ExtError(HTTP_STATUS.BAD_REQUEST, "Post with the given ID was not found.")
+    }
+
+    const post = await postsTable.delete({
+        where: {
+            id
+        }
+    })
+
+    return post;
+}

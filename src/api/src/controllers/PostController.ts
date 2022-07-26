@@ -34,3 +34,14 @@ export const createPost = async (req: Request, res: Response) => {
        processError(error, res);
     }
 }
+
+export const deletePost = async (req: Request, res: Response) => {
+   try {
+        const id = Number(req.params.id);
+        const result = await PostService.deletePost(id);
+
+        res.send(result)
+    } catch (error) {
+       processError(error, res);
+    }
+}
