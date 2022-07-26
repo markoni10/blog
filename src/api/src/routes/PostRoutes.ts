@@ -5,5 +5,6 @@ const postsRouter = Router();
 
 postsRouter.get('/', postController.getAllPosts);
 postsRouter.get('/:id', postController.getPostById);
+postsRouter.post('/', postController.createPost);
 
 export default postsRouter;

@@ -24,3 +24,13 @@ export const getPostById = async (req: Request, res: Response) => {
         processError(error, res);
     }
 }
+
+export const createPost = async (req: Request, res: Response) => {
+   try {
+        const result = await PostService.createPost(req.body);
+
+        res.send(result)
+    } catch (error) {
+       processError(error, res);
+    }
+}
