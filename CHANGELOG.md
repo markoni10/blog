@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2022-07-26
+
+### Changed
+- Fetch data from local database
+
+### Added
+- 3 tier architecture
+- Typescript support
+- Prisma ORM
+- Posts table
+- Users table
+- TypeScript support
+
+### Removed
+- demo db.json
+
 ## [0.1.0] - 2022-07-01
 
 ### Added

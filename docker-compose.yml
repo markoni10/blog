@@ -1,0 +1,50 @@
+version: '3.9' 
+
+services:
+
+  client:
+    build:
+      context: src/client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src/client:/client
+      - ./src/client/public:/client/public
+      - node_modules_client:/client/node_modules
+
+  api:
+    depends_on:
+      - db
+    links:
+      - db
+    build:
+      context: src/api
+      target: api
+    ports:
+      - 5000:5000
+    volumes:
+      - ./src/api:/api
+      - ./src/client/public:/client/public
+      - node_modules_api:/api/node_modules
+  db:
+    build:
+      context: src/api
+      target: db
+    env_file: .env
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+    - 3306:3306
+
+  pma:
+    image: phpmyadmin
+    environment:
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      PMA_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 8000:80
+
+volumes:
+  db:
+  node_modules_api:
+  node_modules_client:
