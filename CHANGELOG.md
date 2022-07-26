@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - Fetch data from local database
 
 ### Added
+- 3 tier architecture
+- Typescript support
 - Prisma ORM
 - Posts table
 - Users table
