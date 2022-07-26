@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.2.0] - 2022-07-26
 
 ### Changed
 - Fetch data from local database
