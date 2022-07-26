@@ -9,7 +9,7 @@ function App() {
 
 	return (
 		<>
-			<Header logo={'Awesome Blog'} />
+			<Header logo={'AwesomeBlog'} />
 			<Routes>
 				<Route path='/' element={<Blog />} />
 				<Route path='/login' element={<Login />} />
