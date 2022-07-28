@@ -1,8 +1,7 @@
-import HTTP_STATUS from "../enum/HttpStatus";
 import * as userRepository from "../repository/UserRepository";
+import { UserType } from '../types/user';
 
 import { generatePasswordHash } from "../util/authentication/authenticationFunctions";
-import ExtError from "../util/errors/ExtError";
 
 export const getAllUsers = async () => {
     const users = await userRepository.getAllUsers();
@@ -16,23 +15,9 @@ export const getUserById = async (id: number) => {
     return user;
 }
 
-export const checkIfEmailExists = async (email: string) => {
-    const user = await userRepository.getUserByEmail(email);
-
-    if(user)
-        return true;
-    
-    return false;
-}
-
-export const createUser = async (data: any) => {
-    const { email, password } = data;
-    
-    const emailExists = await checkIfEmailExists(email);
-    
-    if(emailExists)
-        throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given email already exists.");
-
+export const createUser = async (data: UserType) => {
+    const { password } = data;
+ 
     const password_hash = generatePasswordHash(password);
     data.password = password_hash;
 
@@ -41,4 +26,8 @@ export const createUser = async (data: any) => {
 
 export const deleteUser = async (id: number) => {
     return await userRepository.deleteUser(id);
+}
+
+export const updateUser = async (id: number, data: UserType) => {
+    return await userRepository.updateUser(id, data);
 }
