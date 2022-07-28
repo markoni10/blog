@@ -10,14 +10,13 @@ export const getAllUsers = async () => {
     return users;
 }
 
-export const getUserById = async (id: string) => {
-    const idAsNumber = parseInt(id);
-    const user = await userRepository.getUserById(idAsNumber);
+export const getUserById = async (id: number) => {
+    const user = await userRepository.getUserById(id);
 
     return user;
 }
 
-export const doesUserWithGivenEmailExists = async (email: string) => {
+export const checkIfEmailExists = async (email: string) => {
     const user = await userRepository.getUserByEmail(email);
 
     if(user)
@@ -29,8 +28,10 @@ export const doesUserWithGivenEmailExists = async (email: string) => {
 export const createUser = async (data: any) => {
     const { email, password } = data;
     
-    if(await doesUserWithGivenEmailExists(email))
-        throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given email already exists");
+    const emailExists = await checkIfEmailExists(email);
+    
+    if(emailExists)
+        throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given email already exists.");
 
     const password_hash = generatePasswordHash(password);
     data.password = password_hash;
@@ -38,3 +39,6 @@ export const createUser = async (data: any) => {
     return await userRepository.createUser(data);
 }
 
+export const deleteUser = async (id: number) => {
+    return await userRepository.deleteUser(id);
+}

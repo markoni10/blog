@@ -32,9 +32,6 @@ export const getUserByEmail = async (email: string) => {
         }
     });
 
-    if (!user)
-		throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given email was not found.");
-
     return user;
 }
 
@@ -43,6 +40,19 @@ export const createUser = async (data: any) => {
 
     if(!user)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The data you provided is invalid.");
+
+    return user;
+}
+
+export const deleteUser = async (id: number) => {
+    const user = await prismaUser.delete({
+        where: {
+            id
+        }
+    })
+
+    if(!user)
+        throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
 
     return user;
 }
