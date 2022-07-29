@@ -7,6 +7,8 @@ services:
       context: src/client
     ports:
       - 3000:3000
+    expose:
+      - 3000
     volumes:
       - ./src/client:/client
       - ./src/client/public:/client/public
