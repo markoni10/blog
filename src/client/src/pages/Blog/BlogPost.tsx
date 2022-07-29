@@ -1,10 +1,4 @@
-type BlogPostProps = {
-	item: {
-		title: string,
-		excerpt: string,
-		img: string
-	}
-}
+import { BlogPostProps } from '../../types/PropTypes';
 
 function BlogPost({item: {title, excerpt, img}}: BlogPostProps) {
 	return (

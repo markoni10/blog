@@ -2,7 +2,7 @@ import { BlogContext } from '../../contexts/BlogContext';
 import { useContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import BlogPostListItem from '../../components/BlogPostListItem';
+import BlogPostListItem from '../Blog/BlogPostListItem';
 
 function Dashboard() {
 
