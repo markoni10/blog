@@ -40,7 +40,7 @@ export const getUserByEmail = async (email: string) => {
 export const createUser = async (data: UserType) => {
     const userFound = await getUserByEmail(data.email);
 
-    if(!userFound)
+    if(userFound)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given email already exists.");
 
     const user = await prismaUser.create({data})

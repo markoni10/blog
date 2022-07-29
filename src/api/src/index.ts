@@ -14,8 +14,8 @@ app.use(logger('dev'));
 app.use(cookieParser());
 
 // routers
-app.use('/posts', postsRouter);
-app.use('/users', usersRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/users', usersRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port);
