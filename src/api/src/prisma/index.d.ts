@@ -30,7 +30,7 @@ export type Post = {
  */
 export type User = {
   id: number
-  username: string | null
+  username: string
   email: string
   password: string
 }
@@ -1906,7 +1906,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number
-    username: string | null
+    username: string
     email: string
     password: string
     _count: UserCountAggregateOutputType | null
@@ -2730,7 +2730,7 @@ export namespace Prisma {
     OR?: Enumerable<UserWhereInput>
     NOT?: Enumerable<UserWhereInput>
     id?: IntFilter | number
-    username?: StringNullableFilter | string | null
+    username?: StringFilter | string
     email?: StringFilter | string
     password?: StringFilter | string
   }
@@ -2744,6 +2744,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = {
     id?: number
+    username?: string
     email?: string
   }
 
@@ -2764,7 +2765,7 @@ export namespace Prisma {
     OR?: Enumerable<UserScalarWhereWithAggregatesInput>
     NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
-    username?: StringNullableWithAggregatesFilter | string | null
+    username?: StringWithAggregatesFilter | string
     email?: StringWithAggregatesFilter | string
     password?: StringWithAggregatesFilter | string
   }
@@ -2823,47 +2824,47 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    username?: string | null
+    username: string
     email: string
     password: string
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
-    username?: string | null
+    username: string
     email: string
     password: string
   }
 
   export type UserUpdateInput = {
-    username?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateManyInput = {
     id?: number
-    username?: string | null
+    username: string
     email: string
     password: string
   }
 
   export type UserUpdateManyMutationInput = {
-    username?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
   }
