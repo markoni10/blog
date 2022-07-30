@@ -1,5 +1,5 @@
 import { useState, SyntheticEvent } from 'react';
-import { InputProps } from './types';
+import { InputProps } from '../../types/PropTypes';
 
 function Input({ id, type, label, iconLeft, iconRight }: InputProps) {
 	const [value, setValue] = useState('');

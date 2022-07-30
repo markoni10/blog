@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { BlogContext } from '../contexts/BlogContext';
+import { BlogContext } from '../../contexts/BlogContext';
 
 import BlogPost from './BlogPost';
-import PageTitle from './PageTitle';
-import PageWrapper from './PageWrapper';
+import PageTitle from '../../components/PageTitle';
+import PageWrapper from '../../components/PageWrapper';
 
 export default function Blog() {
 	const { fetchBlogs } = useContext<any>(BlogContext);

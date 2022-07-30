@@ -6,7 +6,7 @@ const BlogContextProvider = (props: PropsWithChildren) => {
 
     const fetchBlogs = async () => {
         try {
-            const data = await fetch('http://localhost:5000/posts', {
+            const data = await fetch('http://localhost:5000/api/posts', {
                 method: 'GET'
             });
             const posts = await data.json();

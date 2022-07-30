@@ -9,14 +9,13 @@ import usersRouter from './routes/UserRoutes';
 const app = express();
 
 app.use(cors());
-
-// routers
-app.use('/posts', postsRouter);
-app.use('/users', usersRouter);
-
+app.use(json());
 app.use(logger('dev'));
 app.use(cookieParser());
-app.use(json());
+
+// routers
+app.use('/api/posts', postsRouter);
+app.use('/api/users', usersRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port);
