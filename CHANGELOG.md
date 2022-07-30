@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Add Dashboard page
+- Add lodash-es as a dependency
+- Add vite for bundling assets
+- Create, read, update & delete user capability
+- Create, delete, update post capability
+
+### Update
+
+- Update blog layout
+
 ## [0.2.0] - 2022-07-26
 
 ### Changed
