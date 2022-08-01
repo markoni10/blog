@@ -1,13 +1,20 @@
-import * as AuthService from '../services/AuthService';
+import * as authService from '../services/AuthService';
 
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { processError } from '../util/errors/ProcessError';
 
+export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await authService.authenticate(req, res, next);
+    } catch (error) {
+        processError(error, res);
+    }
+}
+
 export const signin = async (req: Request, res: Response) => {
     try {
-        const { username, password } = req.body
-        const result = await AuthService.signin(username, password);
+        const result = await authService.signin(req, res);
 
         res.send(result);
     } catch (error) {
@@ -15,9 +22,9 @@ export const signin = async (req: Request, res: Response) => {
     }
 }
 
-export const welcome = async (req: Request, res: Response) => {
+export const signout = async (req: Request, res: Response) => {
     try {
-        const result = await AuthService.welcome();
+        const result = await authService.signout(req, res);
 
         res.send(result);
     } catch (error) {

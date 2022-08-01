@@ -129,7 +129,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/api/src/prisma",
+      "value": "/home/markon/Projects/Personal/blog/src/api/src/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -138,7 +138,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-1.1.x"
+        "value": "debian-openssl-3.0.x"
       },
       {
         "fromEnvVar": null,
@@ -181,10 +181,10 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
-path.join(process.cwd(), "src/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
-
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
 path.join(process.cwd(), "src/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
+
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
+path.join(process.cwd(), "src/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/prisma/schema.prisma")

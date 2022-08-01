@@ -22,14 +22,14 @@ export const getUserById = async (id: number) => {
     });
 
     if (!user)
-		throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
+        throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
 
     return user;
 }
 
 export const getUserByEmail = async (email: string) => {
     const user = await prismaUser.findUnique({
-        where:{
+        where: {
             email
         }
     });
@@ -38,7 +38,7 @@ export const getUserByEmail = async (email: string) => {
 }
 
 const checkIfTaken = (id: number) => async (type: string, field: string) => {
-   const where = {
+    const where = {
         NOT: [
             {
                 id: {
@@ -50,9 +50,9 @@ const checkIfTaken = (id: number) => async (type: string, field: string) => {
         OR: [
             {
                 [type]: {
-                    equals: field 
+                    equals: field
                 }
-            } 
+            }
         ]
     }
 
@@ -68,7 +68,7 @@ export const getUserByUsername = async (username: string) => {
         }
     });
 
-    if(!user) {
+    if (!user) {
         throw new ExtError(HTTP_STATUS.NOT_FOUND, 'The user with the given username doesn\'t exist.')
     }
 
@@ -79,15 +79,15 @@ export const createUser = async (data: UserType) => {
     const userEmailExists = await getUserByEmail(data.email);
     const usernameExists = await getUserByUsername(data.username);
 
-    if(userEmailExists)
+    if (userEmailExists)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given email already exists.");
 
-    if(usernameExists)
+    if (usernameExists)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The user with the given username already exists.");
 
-    const user = await prismaUser.create({data})
+    const user = await prismaUser.create({ data })
 
-    if(!user)
+    if (!user)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The data you provided is invalid.");
 
     return user;
@@ -96,7 +96,7 @@ export const createUser = async (data: UserType) => {
 export const deleteUser = async (id: number) => {
     const userFound = await getUserById(id);
 
-    if(!userFound)
+    if (!userFound)
         throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
 
     const user = await prismaUser.delete({
@@ -111,18 +111,18 @@ export const deleteUser = async (id: number) => {
 export const updateUser = async (id: number, data: UserType) => {
     const userFound = await getUserById(id);
 
-    if(!userFound)
+    if (!userFound)
         throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
 
     const checkIfFieldTaken = checkIfTaken(id);
     const emailTaken = await checkIfFieldTaken('email', data.email);
     const usernameTaken = await checkIfFieldTaken('username', data.username);
 
-    if(emailTaken) {
+    if (emailTaken) {
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, 'The given email address is already in use.');
     }
 
-    if(usernameTaken) {
+    if (usernameTaken) {
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, 'The given username is already in use.');
     }
 
