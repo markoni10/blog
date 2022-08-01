@@ -63,10 +63,14 @@ const checkIfTaken = (id: number) => async (type: string, field: string) => {
 
 export const getUserByUsername = async (username: string) => {
     const user = await prismaUser.findUnique({
-        where:{
+        where: {
             username
         }
     });
+
+    if(!user) {
+        throw new ExtError(HTTP_STATUS.NOT_FOUND, 'The user with the given username doesn\'t exist.')
+    }
 
     return user;
 }
@@ -130,4 +134,10 @@ export const updateUser = async (id: number, data: UserType) => {
     })
 
     return user;
+}
+
+export const getUserPassword = async (username: string) => {
+    const user = await getUserByUsername(username);
+
+    return user?.password;
 }
