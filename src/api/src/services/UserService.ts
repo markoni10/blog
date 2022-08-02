@@ -17,9 +17,7 @@ export const getUserById = async (id: number) => {
 
 export const createUser = async (data: UserType) => {
     const { password } = data;
- 
-    const password_hash = generatePasswordHash(password);
-    data.password = password_hash;
+    data.password = generateUserPassword(password);
 
     return await userRepository.createUser(data);
 }
@@ -29,5 +27,14 @@ export const deleteUser = async (id: number) => {
 }
 
 export const updateUser = async (id: number, data: UserType) => {
+    const { password } = data;
+    data.password = generateUserPassword(password);
+
     return await userRepository.updateUser(id, data);
+}
+
+export const generateUserPassword = (password: string) => {
+    const passwordHash: string = generatePasswordHash(password);
+
+    return passwordHash;
 }

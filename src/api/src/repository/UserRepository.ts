@@ -1,6 +1,6 @@
 import { PrismaClient } from '../prisma';
-import ExtError from '../util/errors/ExtError';
 
+import ExtError from '../util/errors/ExtError';
 import HTTP_STATUS from '../enum/HttpStatus.js';
 
 import { UserType } from '../types/user';
@@ -9,7 +9,14 @@ const prisma = new PrismaClient();
 const prismaUser = prisma.user;
 
 export const getAllUsers = async () => {
-    const users = await prismaUser.findMany();
+    const users = await prismaUser.findMany({
+        select: {
+            username: true,
+            password: false,
+            email: true,
+            id: true
+        }
+    });
 
     return users;
 }
@@ -18,7 +25,7 @@ export const getUserById = async (id: number) => {
     const user = await prismaUser.findUnique({
         where: {
             id
-        }
+        },
     });
 
     if (!user)
@@ -65,12 +72,14 @@ export const getUserByUsername = async (username: string) => {
     const user = await prismaUser.findUnique({
         where: {
             username
+        },
+        select: {
+            id: true,
+            username: true,
+            email: true,
+            password: false
         }
     });
-
-    if (!user) {
-        throw new ExtError(HTTP_STATUS.NOT_FOUND, 'The user with the given username doesn\'t exist.')
-    }
 
     return user;
 }
@@ -130,14 +139,30 @@ export const updateUser = async (id: number, data: UserType) => {
         where: {
             id
         },
-        data
+        data,
+        select: {
+            username: true,
+            password: false,
+            email: true,
+            id: true
+        }
     })
 
     return user;
 }
 
 export const getUserPassword = async (username: string) => {
-    const user = await getUserByUsername(username);
+    const user = await prismaUser.findUnique({
+        where: {
+            username
+        },
+        select: {
+            id: false,
+            password: true,
+            username: false,
+            email: false
+        }
+    });
 
-    return user?.password;
+    return user?.password!;
 }

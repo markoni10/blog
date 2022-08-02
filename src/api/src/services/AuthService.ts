@@ -9,7 +9,8 @@ import * as userRepository from "../repository/UserRepository";
 
 const validateUserPassword = (userID: number) => {
     return async (plainTextPassword: string) => {
-        const { password } = await userRepository.getUserById(userID);
+        const { username } = await userRepository.getUserById(userID);
+        const password = await userRepository.getUserPassword(username);
 
         return await comparePasswords(password, plainTextPassword);
     }
@@ -39,8 +40,12 @@ export const signin = async (req: Request, res: Response) => {
     throwErrorIfPasswordEmpty(password);
 
     const user = await userRepository.getUserByUsername(username);
-    const userID = user.id;
 
+    if (!user) {
+        throw new ExtError(HTTP_STATUS.NOT_FOUND, 'The user with the given username doesn\'t exist.')
+    }
+
+    const userID = user.id;
     const validatePassword = validateUserPassword(userID);
     const passwordValid = await validatePassword(password);
 
