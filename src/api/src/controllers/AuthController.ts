@@ -12,9 +12,9 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     }
 }
 
-export const signin = async (req: Request, res: Response) => {
+export const signin = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await authService.signin(req, res);
+        const result = await authService.signin(req, res, next);
 
         res.send(result);
     } catch (error) {
@@ -22,9 +22,9 @@ export const signin = async (req: Request, res: Response) => {
     }
 }
 
-export const signout = async (req: Request, res: Response) => {
+export const signout = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const result = await authService.signout(req, res);
+        const result = await authService.signout(req, res, next);
 
         res.send(result);
     } catch (error) {

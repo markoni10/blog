@@ -14,7 +14,7 @@ import { generatePasswordHash } from './util/authentication/authenticationFuncti
 
 declare module 'express-session' {
     export interface SessionData {
-        user: { [key: string]: any };
+        user: { [key: string]: any } | null;
     }
 }
 

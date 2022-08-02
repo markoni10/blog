@@ -16,6 +16,12 @@ const validateUserPassword = (userID: number) => {
     }
 }
 
+export const authorize = async (userID: number) => {
+    const user = await userRepository.getUserById(userID);
+
+    console.log(user)
+}
+
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     if (req.sessionID && req.session.user) {
         next();
@@ -25,7 +31,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     }
 }
 
-export const signin = async (req: Request, res: Response) => {
+export const signin = async (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
 
     if (req.session.user) {
@@ -53,13 +59,23 @@ export const signin = async (req: Request, res: Response) => {
         throw new ExtError(HTTP_STATUS.UNAUTHORIZED, 'The given password is invalid.')
     }
 
+    regenerateSession(req, res, next);
     req.session.user = username;
 
     return { message: 'Successfuly logged in!' };
 }
 
-export const signout = async (req: Request, res: Response) => {
+export const signout = async (req: Request, res: Response, next: NextFunction) => {
     req.session.destroy((err) => console.error(err));
 
+    regenerateSession(req, res, next);
+    req.session.user = null;
+
     return { message: 'Successfuly logged out!' };
+}
+
+export const regenerateSession = (req: Request, res: Response, next: NextFunction) => {
+    req.session.regenerate((err) => {
+        if (err) next(err)
+    })
 }

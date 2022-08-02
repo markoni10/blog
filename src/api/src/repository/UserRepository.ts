@@ -18,7 +18,6 @@ function exclude<User, Key extends keyof User>(
     return user;
 }
 
-
 export const getAllUsers = async () => {
     const users = await prismaUser.findMany();
 
