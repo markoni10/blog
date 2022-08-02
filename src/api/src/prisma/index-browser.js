@@ -95,7 +95,8 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
   id: 'id',
   username: 'username',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  role: 'role'
 });
 
 exports.Prisma.SortOrder = makeEnum({

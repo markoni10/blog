@@ -8,17 +8,21 @@ import { UserType } from '../types/user';
 const prisma = new PrismaClient();
 const prismaUser = prisma.user;
 
-export const getAllUsers = async () => {
-    const users = await prismaUser.findMany({
-        select: {
-            username: true,
-            password: false,
-            email: true,
-            id: true
-        }
-    });
+function exclude<User, Key extends keyof User>(
+    user: User,
+    ...keys: Key[]
+): Omit<User, Key> {
+    for (let key of keys) {
+        delete user[key]
+    }
+    return user;
+}
 
-    return users;
+
+export const getAllUsers = async () => {
+    const users = await prismaUser.findMany();
+
+    return users.map(user => exclude(user, 'password'));
 }
 
 export const getUserById = async (id: number) => {
@@ -31,7 +35,7 @@ export const getUserById = async (id: number) => {
     if (!user)
         throw new ExtError(HTTP_STATUS.NOT_FOUND, "User with the given ID was not found.");
 
-    return user;
+    return exclude(user, 'password');
 }
 
 export const getUserByEmail = async (email: string) => {
@@ -41,7 +45,9 @@ export const getUserByEmail = async (email: string) => {
         }
     });
 
-    return user;
+    if (user) {
+        return exclude(user, 'password');
+    }
 }
 
 const checkIfTaken = (id: number) => async (type: string, field: string) => {
@@ -72,16 +78,12 @@ export const getUserByUsername = async (username: string) => {
     const user = await prismaUser.findUnique({
         where: {
             username
-        },
-        select: {
-            id: true,
-            username: true,
-            email: true,
-            password: false
         }
     });
 
-    return user;
+    if (user) {
+        return exclude(user, 'password');
+    }
 }
 
 export const createUser = async (data: UserType) => {
@@ -99,7 +101,7 @@ export const createUser = async (data: UserType) => {
     if (!user)
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, "The data you provided is invalid.");
 
-    return user;
+    return exclude(user, 'password');
 }
 
 export const deleteUser = async (id: number) => {
@@ -114,7 +116,9 @@ export const deleteUser = async (id: number) => {
         }
     })
 
-    return user;
+    if (user) {
+        return exclude(user, 'password');
+    }
 }
 
 export const updateUser = async (id: number, data: UserType) => {
@@ -140,27 +144,17 @@ export const updateUser = async (id: number, data: UserType) => {
             id
         },
         data,
-        select: {
-            username: true,
-            password: false,
-            email: true,
-            id: true
-        }
     })
 
-    return user;
+    if (user) {
+        return exclude(user, 'password');
+    }
 }
 
 export const getUserPassword = async (username: string) => {
     const user = await prismaUser.findUnique({
         where: {
             username
-        },
-        select: {
-            id: false,
-            password: true,
-            username: false,
-            email: false
         }
     });
 
