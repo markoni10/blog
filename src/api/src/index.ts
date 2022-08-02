@@ -25,7 +25,7 @@ const secretHash = generatePasswordHash('myawesomeblog');
 app.use(session({
     secret: secretHash,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true
 }));
 
 app.use(cors());
@@ -33,7 +33,7 @@ app.use(json());
 app.use(logger('dev'));
 app.use(cookieParser());
 
-app.use('/api/posts', authController.authenticate, postsRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api/users', authController.authenticate, usersRouter);
 app.use('/auth', authRouter);
 

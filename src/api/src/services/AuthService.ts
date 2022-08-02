@@ -1,22 +1,17 @@
-import bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 
 import HTTP_STATUS from '../enum/HttpStatus';
 import ExtError from '../util/errors/ExtError';
-import { NextFunction, Request, Response } from 'express';
+import { comparePasswords } from '../util/authentication/authenticationFunctions';
+import { isCredentialEmpty } from '../util/validation/fields';
 
 import * as userRepository from "../repository/UserRepository";
 
-const isCredentialValid = (code: HTTP_STATUS) => (fieldName: string) => (field: string) => {
-    if (!field) {
-        throw new ExtError(code, `${fieldName} can\'t be empty.`);
-    }
-}
-
-const validatePasswordForUser = (userID: number) => {
+const validateUserPassword = (userID: number) => {
     return async (plainTextPassword: string) => {
         const { password } = await userRepository.getUserById(userID);
 
-        return await bcrypt.compare(plainTextPassword, password);
+        return await comparePasswords(password, plainTextPassword);
     }
 }
 
@@ -36,16 +31,17 @@ export const signin = async (req: Request, res: Response) => {
         throw new ExtError(HTTP_STATUS.BAD_REQUEST, 'Already logged in');
     }
 
-    const isUsernameInvalid = isCredentialValid(HTTP_STATUS.BAD_REQUEST);
-    const isPasswordInvalid = isCredentialValid(HTTP_STATUS.BAD_REQUEST);
+    const badRequestIfFieldEmpty = isCredentialEmpty(HTTP_STATUS.BAD_REQUEST);
+    const throwErrorIfUsernameEmpty = badRequestIfFieldEmpty('Username');
+    const throwErrorIfPasswordEmpty = badRequestIfFieldEmpty('Password');
 
-    isUsernameInvalid('Username')(username);
-    isPasswordInvalid('Password')(password);
+    throwErrorIfUsernameEmpty(username);
+    throwErrorIfPasswordEmpty(password);
 
     const user = await userRepository.getUserByUsername(username);
     const userID = user.id;
 
-    const validatePassword = validatePasswordForUser(userID);
+    const validatePassword = validateUserPassword(userID);
     const passwordValid = await validatePassword(password);
 
     if (!passwordValid) {
